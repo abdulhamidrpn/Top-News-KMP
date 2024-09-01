@@ -4,6 +4,16 @@
 ## Overview
 **Top-News-KMP** is a versatile news application built using Kotlin Multiplatform (KMP), designed to deliver the latest news across Android, iOS and Desktop platforms. This project showcases the power of shared code between multiple platforms while maintaining a native experience on each. Whether on a smartphone or tablet, desktop Top-News-KMP provides a seamless and consistent user experience.
 
+### Application Demo:
+<table>
+  <tr>
+    <td>
+      <a href="https://youtu.be/4dDDITxv4Ow">
+      <img src="https://github.com/user-attachments/assets/8f115eda-3411-4c36-a2e1-1bb4430f124a" align="left" height="168.75" width="300" ></a></td>
+  </tr>
+</table>
+<table>
+  
 ## 🚀 Key Features
 - **Cross-Platform Compatibility** (Android, iOS & Desktop Applications)
 - **Live News Feed** with category filtering
@@ -64,7 +74,7 @@ Compose Libraries
 
 ## 🌟 Contributions
 Contributions are welcome! Please don't forget to fix this repository, submit a PR, or report any issues you encounter. Whether you're fixing a bug or adding a new feature, your contributions will make this project better for everyone!
-[Inspired By](https://github.com/Coding-Meet/News-KMP-App)
+-**Inspired By**: [Coding Meet](https://github.com/Coding-Meet/News-KMP-App). Thanks for your News App. 
 
 ## Getting Started
 
@@ -95,11 +105,8 @@ API_KEY_NEWS_DATA = YOUR_API_KEY From News Data IO
   for [Ios](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html#run-your-application-on-ios)
 - For Desktop, run `./gradlew :composeApp:run`
 
-### Application Demo:
-<p>
-  <a href="https://youtu.be/4dDDITxv4Ow"><img src="https://github.com/user-attachments/assets/8f115eda-3411-4c36-a2e1-1bb4430f124a" align="left" height="168.75" width="300" ></a>
-</p>
 
+  
 ## 🔗 Connect with me
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://linktr.ee/abdulhamidrpn)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abdulhamidrpn/)
