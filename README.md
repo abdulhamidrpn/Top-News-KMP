@@ -95,7 +95,10 @@ API_KEY_NEWS_DATA = YOUR_API_KEY From News Data IO
   for [Ios](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html#run-your-application-on-ios)
 - For Desktop, run `./gradlew :composeApp:run`
 
-### Run the app on your device or emulator:
+### Application Demo:
+<p>
+  <a href="https://youtu.be/4dDDITxv4Ow"><img src="https://github.com/user-attachments/assets/8f115eda-3411-4c36-a2e1-1bb4430f124a" align="left" height="168.75" width="300" ></a>
+</p>
 
 ## 🔗 Connect with me
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://linktr.ee/abdulhamidrpn)
