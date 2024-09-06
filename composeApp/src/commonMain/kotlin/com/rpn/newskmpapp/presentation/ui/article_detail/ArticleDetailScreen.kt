@@ -20,10 +20,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.rounded.ExitToApp
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -45,21 +41,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
-import com.rpn.newskmpapp.domain.model.Article
+import com.rpn.newskmpapp.data.model.Article
+import com.rpn.newskmpapp.presentation.icon.AppIcons
 import com.rpn.newskmpapp.presentation.theme.detailImageSize
 import com.rpn.newskmpapp.presentation.theme.getDimens
 import com.rpn.newskmpapp.utils.shareLink
 import kmp_news_app.composeapp.generated.resources.Res
 import kmp_news_app.composeapp.generated.resources.go_back
-import kmp_news_app.composeapp.generated.resources.ic_bookmark_filled
-import kmp_news_app.composeapp.generated.resources.ic_bookmark_outlined
-import kmp_news_app.composeapp.generated.resources.ic_browse
 import kmp_news_app.composeapp.generated.resources.logo
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -102,7 +95,7 @@ fun ArticleDetailScreen(
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
+                            AppIcons.ArrowBack,
                             contentDescription = stringResource(Res.string.go_back)
                         )
                     }
@@ -114,7 +107,7 @@ fun ArticleDetailScreen(
                         },
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Share,
+                            imageVector = AppIcons.Share,
                             contentDescription = "Share"
                         )
                     }
@@ -124,7 +117,7 @@ fun ArticleDetailScreen(
                         },
                     ) {
                         Icon(
-                            painter = painterResource(Res.drawable.ic_browse),
+                            painter = painterResource(AppIcons.Browse),
                             contentDescription = "Browse"
                         )
                     }
@@ -134,8 +127,8 @@ fun ArticleDetailScreen(
                     }) {
                         Icon(
                             painter = painterResource(
-                                if (articleDetailViewModel.isBookmarked) Res.drawable.ic_bookmark_filled
-                                else Res.drawable.ic_bookmark_outlined
+                                if (articleDetailViewModel.isBookmarked) AppIcons.Bookmark
+                                else AppIcons.BookmarkBorder
                             ),
                             contentDescription = null,
                         )
@@ -205,7 +198,7 @@ fun ArticleDetailScreen(
                                 )
 
                                 Text(
-                                    text = currentArticle.publishedAt,
+                                    text = currentArticle.formatPublishedAt,
                                     style = MaterialTheme.typography.labelSmall,
                                 )
                             }
@@ -253,7 +246,7 @@ fun ArticleDetailScreen(
                                     shape = MaterialTheme.shapes.small,
                                 ) {
                                     Icon(
-                                        imageVector = Icons.AutoMirrored.Rounded.ExitToApp,
+                                        imageVector = AppIcons.ExitToApp,
                                         contentDescription = null,
                                         modifier = Modifier.padding(end = 16.dp)
                                     )

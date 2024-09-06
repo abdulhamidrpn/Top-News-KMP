@@ -3,39 +3,37 @@ package com.rpn.newskmpapp.presentation.ui.article_detail
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.rpn.newskmpapp.data.mapper.toEntity
-import com.rpn.newskmpapp.data.repository.LocalNewsRepository
-import com.rpn.newskmpapp.domain.model.Article
+import com.rpn.newskmpapp.data.mapper.toFavouriteEntity
+import com.rpn.newskmpapp.data.model.Article
+import com.rpn.newskmpapp.domain.repository.FavouriteNewsRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 
 
 class ArticleDetailViewModel(
-    private val localNewsRepository: LocalNewsRepository
+    private val favouriteNewsRepository: FavouriteNewsRepository
 ) : ViewModel() {
+    private val viewModelScope = CoroutineScope(Dispatchers.IO)
 
     var isBookmarked by mutableStateOf(false)
 
     fun isArticleBookmark(currentArticle: Article) {
-        viewModelScope.launch(Dispatchers.IO) {
-            currentArticle.publishedAt.let {
-                localNewsRepository.getArticle(it)?.let {
-                    isBookmarked = true
-                }
-            }
+        viewModelScope.launch {
+            println("currentArticle isBookmarked previous: $isBookmarked")
+            isBookmarked = favouriteNewsRepository.isArticleFavorite(currentArticle.publishedAt)
+            println("currentArticle isBookmarked after: $isBookmarked")
         }
     }
 
     fun bookmarkArticle(currentArticle: Article) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             if (!isBookmarked) {
-                localNewsRepository.upsertArticle(currentArticle.toEntity())
+                favouriteNewsRepository.upsertArticle(currentArticle.toFavouriteEntity())
             } else {
-                localNewsRepository.deleteArticle(currentArticle.toEntity())
+                favouriteNewsRepository.deleteArticle(currentArticle.toFavouriteEntity())
             }
             isBookmarked = !isBookmarked
         }

@@ -1,9 +1,7 @@
 package com.rpn.newskmpapp.presentation.ui.home
 
 import androidx.lifecycle.ViewModel
-import com.rpn.newskmpapp.domain.model.Article
-import com.rpn.newskmpapp.domain.repository.NewsRepository
-import com.rpn.newskmpapp.domain.use_case.GetHeadLines
+import com.rpn.newskmpapp.domain.use_case.GetHeadLinesUseCase
 import com.rpn.newskmpapp.domain.utils.DataState
 import com.rpn.newskmpapp.utils.Resource
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeViewModel(
-    private val getHeadLines: GetHeadLines
+    private val getHeadLinesUseCase: GetHeadLinesUseCase
 ) : ViewModel() {
 
     private val viewModelScope = CoroutineScope(Dispatchers.IO)
@@ -51,7 +49,7 @@ class HomeViewModel(
     }
 
     private suspend fun getHeadLineData() {
-        getHeadLines()
+        getHeadLinesUseCase()
             .onEach { data ->
                 when (data) {
                     DataState.Loading -> {
@@ -60,6 +58,7 @@ class HomeViewModel(
 
                     is DataState.Success -> {
                         withContext(Dispatchers.Main) {
+                            println("GetHeadlines: ${data.data.size} -> ${data.data}")
                             _state.update { it.copy(articles = Resource.Success(data.data)) }
                         }
                     }

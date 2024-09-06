@@ -1,6 +1,6 @@
 package com.rpn.newskmpapp.domain.repository
 
-import com.rpn.newskmpapp.domain.model.Article
+import com.rpn.newskmpapp.data.model.Article
 import com.rpn.newskmpapp.domain.utils.DataState
 import kotlinx.coroutines.flow.Flow
 

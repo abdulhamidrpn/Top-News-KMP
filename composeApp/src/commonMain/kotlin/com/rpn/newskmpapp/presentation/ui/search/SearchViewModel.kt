@@ -1,8 +1,8 @@
 package com.rpn.newskmpapp.presentation.ui.search
 
 import androidx.lifecycle.ViewModel
-import com.rpn.newskmpapp.data.utils.AppPreferences
-import com.rpn.newskmpapp.domain.use_case.GetSearchData
+import com.rpn.newskmpapp.data.datastore.AppPreferences
+import com.rpn.newskmpapp.domain.use_case.GetSearchDataUseCase
 import com.rpn.newskmpapp.domain.utils.DataState
 import com.rpn.newskmpapp.utils.Resource
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SearchViewModel(
-    private val getSearchData: GetSearchData,
+    private val getSearchDataUseCase: GetSearchDataUseCase,
     private val appPreferences: AppPreferences
 ) : ViewModel() {
     private val viewModelScope = CoroutineScope(Dispatchers.IO)
@@ -78,7 +78,7 @@ class SearchViewModel(
     }
 
     private suspend fun getSearchArticles(query: String) {
-        getSearchData(query = query)
+        getSearchDataUseCase(query = query)
             .onEach { data ->
                 when (data) {
                     DataState.Loading -> {

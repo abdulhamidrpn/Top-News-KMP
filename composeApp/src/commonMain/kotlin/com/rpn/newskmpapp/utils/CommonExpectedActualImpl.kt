@@ -1,9 +1,5 @@
 package com.rpn.newskmpapp.utils
 
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences

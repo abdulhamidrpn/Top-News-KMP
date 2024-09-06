@@ -106,6 +106,14 @@ kotlin {
             // Room + Sqlite
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
+
+
+
+            //Check Internet Connection
+            implementation(libs.konnection)
+
+            //Format Date Time
+            implementation(libs.kotlinx.datetime)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

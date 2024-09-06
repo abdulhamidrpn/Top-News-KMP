@@ -5,13 +5,25 @@ package com.rpn.newskmpapp.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.rpn.newskmpapp.data.local.dao.CachedArticleDao
+import com.rpn.newskmpapp.data.local.dao.FavoriteArticleDao
+import com.rpn.newskmpapp.data.local.dao.NewsDao
 import com.rpn.newskmpapp.data.local.entity.ArticleEntity
+import com.rpn.newskmpapp.data.local.entity.CachedArticleEntity
+import com.rpn.newskmpapp.data.local.entity.FavoriteArticleEntity
 
-@Database(entities = [ArticleEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [ArticleEntity::class, CachedArticleEntity::class, FavoriteArticleEntity::class],
+    version = 4,
+    exportSchema = false,
+)
 @TypeConverters(SourceTypeConverter::class)
-//@ConstructedBy(AppDatabaseConstructor::class)
 abstract class NewsDatabase : RoomDatabase(), DB {
+
     abstract fun newsDao(): NewsDao
+    abstract fun cachedArticleDao(): CachedArticleDao
+    abstract fun favouriteArticleDao(): FavoriteArticleDao
+
     override fun clearAllTables() {
         super.clearAllTables()
     }
@@ -20,7 +32,3 @@ abstract class NewsDatabase : RoomDatabase(), DB {
 interface DB {
     fun clearAllTables(): Unit {}
 }
-
-// The Room compiler generates the `actual` implementations.
-//@Suppress("NO_ACTUAL_FOR_EXPECT")
-//expect object AppDatabaseConstructor : RoomDatabaseConstructor<NewsDatabase>

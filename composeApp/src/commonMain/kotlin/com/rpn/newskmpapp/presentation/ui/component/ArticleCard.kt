@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.rpn.newskmpapp.domain.model.Article
+import com.rpn.newskmpapp.data.model.Article
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -76,23 +76,24 @@ fun ArticleItem(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    Text(
-                        modifier = Modifier.padding(top = 8.dp).sharedElement(
-                            state = rememberSharedContentState(
-                                key = "item-description-${article.id}"
+                    if (!article.description.isNullOrEmpty()) {
+                        Text(
+                            modifier = Modifier.padding(top = 8.dp).sharedElement(
+                                state = rememberSharedContentState(
+                                    key = "item-description-${article.id}"
+                                ),
+                                animatedVisibilityScope = animatedVisibilityScope,
                             ),
-                            animatedVisibilityScope = animatedVisibilityScope,
-                        ),
-                        text = article.description ?: "",
-                        style = MaterialTheme.typography.bodySmall,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
-                    )
-
+                            text = article.description,
+                            style = MaterialTheme.typography.bodySmall,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
 
 
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         if (article.sourceName.isNotEmpty()) {
@@ -104,23 +105,25 @@ fun ArticleItem(
                                     Text(
                                         text = article.sourceName,
                                         maxLines = 2,
-                                        style = MaterialTheme.typography.labelMedium
+                                        style = MaterialTheme.typography.labelMedium,
+                                        modifier = Modifier.padding(vertical = 2.dp)
                                     )
                                 },
-                                shape = RoundedCornerShape(16.dp),
+                                shape = RoundedCornerShape(16.dp)
+
                             )
                         }
 
                         Text(
                             text = article.author,
-                            maxLines = 2,
+                            maxLines = 1,
                             style = MaterialTheme.typography.labelSmall,
                         )
                     }
 
                     Text(
                         modifier = Modifier.align(Alignment.End),
-                        text = article.publishedAt,
+                        text = article.formatPublishedAt,
                         style = MaterialTheme.typography.labelSmall,
                         fontWeight = FontWeight.Bold,
                         maxLines = 1
@@ -129,6 +132,7 @@ fun ArticleItem(
             }
         }
     }
+
 }
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -140,7 +144,6 @@ fun FeaturedArticle(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-
     Surface(
         modifier = modifier
             .shadow(
@@ -184,22 +187,23 @@ fun FeaturedArticle(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Text(
-                    modifier = Modifier.padding(top = 8.dp).sharedElement(
-                        state = rememberSharedContentState(
-                            key = "item-description-${article.id}"
+                if (!article.description.isNullOrEmpty()) {
+                    Text(
+                        modifier = Modifier.padding(top = 8.dp).sharedElement(
+                            state = rememberSharedContentState(
+                                key = "item-description-${article.id}"
+                            ),
+                            animatedVisibilityScope = animatedVisibilityScope,
                         ),
-                        animatedVisibilityScope = animatedVisibilityScope,
-                    ),
-                    text = article.description ?: "",
-                    style = MaterialTheme.typography.bodySmall,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-
+                        text = article.description,
+                        style = MaterialTheme.typography.bodySmall,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
 
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     if (article.sourceName.isNotEmpty()) {
@@ -211,7 +215,8 @@ fun FeaturedArticle(
                                 Text(
                                     text = article.sourceName,
                                     maxLines = 2,
-                                    style = MaterialTheme.typography.labelMedium
+                                    style = MaterialTheme.typography.labelMedium,
+                                    modifier = Modifier.padding(vertical = 2.dp)
                                 )
                             },
                             shape = RoundedCornerShape(16.dp),
@@ -220,13 +225,14 @@ fun FeaturedArticle(
 
                     Text(
                         text = article.author,
-                        maxLines = 2,
+                        maxLines = 1,
                         style = MaterialTheme.typography.labelSmall,
                     )
                 }
 
                 Text(
-                    text = article.publishedAt,
+                    modifier = Modifier.align(Alignment.End),
+                    text = article.formatPublishedAt,
                     style = MaterialTheme.typography.labelSmall,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1
@@ -236,4 +242,5 @@ fun FeaturedArticle(
         }
 
     }
+
 }

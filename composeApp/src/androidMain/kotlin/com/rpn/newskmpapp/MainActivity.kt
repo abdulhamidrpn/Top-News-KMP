@@ -8,22 +8,26 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.rpn.newskmpapp.di.initKoin
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.logger.Level
+import com.rpn.newskmpapp.utils.setActivityProvider
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ContextUtils.setContext(context = this)
+        setActivityProvider { this }
+//        ContextUtils.setContext(context = this)
         installSplashScreen()
-        initKoin {
-            androidLogger(level = Level.NONE)
-            androidContext(androidContext = this@MainActivity)
-        }
         setContent {
-            enableEdgeToEdge()
+            enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(
+                    android.graphics.Color.TRANSPARENT,
+                    android.graphics.Color.TRANSPARENT,
+                ),
+                navigationBarStyle = SystemBarStyle.auto(
+                    MaterialTheme.colorScheme.onSurface.toArgb(),
+                    MaterialTheme.colorScheme.onSurface.toArgb(),
+                ),
+            )
+//            enableEdgeToEdge()
             /*(
                 SystemBarStyle.dark(MaterialTheme.colorScheme.onSurface.toArgb()),
                 SystemBarStyle.dark(MaterialTheme.colorScheme.onSurface.toArgb()),

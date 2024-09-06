@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.rpn.newskmpapp.presentation.icon.AppIcons
 import com.rpn.newskmpapp.presentation.theme.getDimens
 import com.rpn.newskmpapp.presentation.theme.mediumPadding
 import com.rpn.newskmpapp.presentation.theme.xLargePadding
@@ -96,7 +97,7 @@ fun BookmarkDialog(
         text = { Text(stringResource(Res.string.delete_bookmark_description)) },
         icon = {
             Icon(
-                imageVector = Icons.Outlined.Delete,
+                imageVector = AppIcons.Delete,
                 contentDescription = stringResource(Res.string.delete_bookmark)
             )
         },

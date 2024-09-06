@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -33,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.rpn.newskmpapp.presentation.icon.AppIcons
 import com.rpn.newskmpapp.presentation.navigation.Routes
 import com.rpn.newskmpapp.presentation.navigation.graphs.MainNavGraph
 import com.rpn.newskmpapp.presentation.navigation.rails.items.navigationItems
@@ -51,7 +50,7 @@ import org.jetbrains.compose.resources.stringResource
 fun MainScreen(
     rootNavController: NavHostController,
     mainNavController: NavHostController,
-    sharedTransactionScope: SharedTransitionScope,
+    sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope
 ) {
 
@@ -135,7 +134,7 @@ fun MainScreen(
                                 },
                             ) {
                                 Icon(
-                                    imageVector = Icons.Default.Settings,
+                                    imageVector = AppIcons.Settings,
                                     contentDescription = stringResource(Res.string.setting)
                                 )
                             }
@@ -148,7 +147,7 @@ fun MainScreen(
                         rootNavController = rootNavController,
                         homeNavController = mainNavController,
                         paddingValues = PaddingValues(),
-                        sharedTransactionScope = sharedTransactionScope,
+                        sharedTransactionScope = sharedTransitionScope,
                         animatedVisibilityScope = animatedVisibilityScope
                     )
                 }
@@ -180,7 +179,7 @@ fun MainScreen(
                             },
                         ) {
                             Icon(
-                                imageVector = Icons.Default.Settings,
+                                imageVector = AppIcons.Settings,
                                 contentDescription = stringResource(Res.string.setting)
                             )
                         }
@@ -211,7 +210,7 @@ fun MainScreen(
                 rootNavController = rootNavController,
                 homeNavController = mainNavController,
                 paddingValues = paddingValues,
-                sharedTransactionScope = sharedTransactionScope,
+                sharedTransactionScope = sharedTransitionScope,
                 animatedVisibilityScope = animatedVisibilityScope
             )
         }

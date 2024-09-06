@@ -1,21 +1,23 @@
 [versions]
-agp = "8.5.2"
+agp = "8.6.0"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
-androidx-activityCompose = "1.9.1"
+androidx-activityCompose = "1.9.2"
 androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.6.1"
-androidx-lifecycle = "2.8.0"
+androidx-lifecycle = "2.8.1"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
-compose-plugin = "1.7.0-alpha01"
+compose-plugin = "1.7.0-beta01"
 junit = "4.13.2"
+konnection = "1.4.1"
 kotlinx-coroutines = "1.8.1"
 
-navigationCompose = "2.8.0-alpha08"
+kotlinxDatetimeVersion = "0.6.0"
+navigationCompose = "2.8.0-alpha09"
 
 kermit = "2.0.4"
 composeAnimation = "1.7.0-beta07"
@@ -25,9 +27,9 @@ ktor = "2.3.12"
 kotlinx-serialization = "1.7.1"
 coil3 = "3.0.0-alpha06"
 material3WindowSizeClassMultiplatform = "0.5.0"
-material3Android = "1.3.0-rc01"
+material3Android = "1.3.0"
 animationCore = "1.7.0-SNAPSHOT"
-uiAndroid = "1.7.0-rc01"
+uiAndroid = "1.7.0"
 coreSplashscreen = "1.0.1"
 
 #Koin
@@ -45,10 +47,11 @@ pagingComposeAndroid = "3.3.2"
 ksp = "2.0.10-1.0.24"
 sqlite = "2.5.0-SNAPSHOT"
 androidx-room = "2.7.0-alpha04"
-foundationDesktop = "1.6.8"
+foundationDesktop = "1.7.0"
 
 [libraries]
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+konnection = { module = "dev.tmapps:konnection", version.ref = "konnection" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -73,9 +76,15 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
-androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
-androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx-paging" }
-androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
+#androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
+#androidx-paging-common = { module = "androidx.paging",name = "paging-common", version.ref = "androidx-paging" }
+#androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
+
+
+paging3-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "pagingComposeAndroid" }
+paging3-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "pagingComposeAndroid" }
+
+
 okio = "com.squareup.okio:okio:3.9.0"
 
 

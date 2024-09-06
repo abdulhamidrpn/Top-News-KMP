@@ -13,9 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AssistChipDefaults.assistChipColors
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,6 +37,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.rpn.newskmpapp.presentation.icon.AppIcons
 import com.rpn.newskmpapp.presentation.theme.getDimens
 import com.rpn.newskmpapp.presentation.ui.component.ArticleList
 import com.rpn.newskmpapp.presentation.ui.component.EmptyContent
@@ -48,11 +46,10 @@ import com.rpn.newskmpapp.presentation.ui.search.component.SearchAppView
 import com.rpn.newskmpapp.utils.popularSearchKeywords
 import kmp_news_app.composeapp.generated.resources.Res
 import kmp_news_app.composeapp.generated.resources.ic_browse
-import kmp_news_app.composeapp.generated.resources.ic_network_error
-import kmp_news_app.composeapp.generated.resources.ic_search
 import kmp_news_app.composeapp.generated.resources.no_news
 import kmp_news_app.composeapp.generated.resources.type_to_search
 import kotlinx.coroutines.delay
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 
@@ -101,7 +98,7 @@ fun SearchScreen(
             },
             onRemoveHistory = { onEvent(SearchScreenEvents.OnRemoveHistory) },
             leadingIcon = {
-                Icon(imageVector = Icons.Filled.Search, contentDescription = "Search")
+                Icon(painterResource(AppIcons.Search), contentDescription = "Search")
             },
             trailingIcon = {
                 IconButton(
@@ -112,7 +109,7 @@ fun SearchScreen(
                         } else navController.navigateUp()
                     }
                 ) {
-                    Icon(imageVector = Icons.Filled.Close, contentDescription = "Close")
+                    Icon(imageVector = AppIcons.Close, contentDescription = "Close")
                 }
             },
         )
@@ -128,7 +125,7 @@ fun SearchScreen(
             }
 
             val leadingIcon: @Composable (() -> Unit) = {
-                Icon(imageVector = Icons.Default.Search, contentDescription = null)
+                Icon(painterResource(AppIcons.Search), contentDescription = null)
             }
             LazyRow(
                 contentPadding = PaddingValues(horizontal = getDimens().paddingLarge),
@@ -157,7 +154,7 @@ fun SearchScreen(
                 onIdle = {
                     EmptyContent(
                         message = stringResource(Res.string.type_to_search),
-                        icon = Res.drawable.ic_search,
+                        icon = AppIcons.Search,
                         onRetryClick = null
                     )
                 },
@@ -185,7 +182,7 @@ fun SearchScreen(
                 onError = {
                     EmptyContent(
                         message = it,
-                        icon = Res.drawable.ic_network_error,
+                        icon = AppIcons.NetworkError,
                         onRetryClick = {
                             onEvent(SearchScreenEvents.OnSearchClicked(state.searchQuery))
                         }

@@ -11,6 +11,28 @@ import com.rpn.newskmpapp.data.utils.Constants
 import com.rpn.newskmpapp.data.utils.Constants.DB_NAME
 import java.util.UUID
 
+import android.app.Activity
+import android.app.Application
+import org.koin.mp.KoinPlatform
+
+actual fun shareLink(url: String) {
+    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+        putExtra(Intent.EXTRA_TEXT, url)
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, "Share Link")
+    activityProvider.invoke().startActivity(shareIntent)
+}
+
+private var activityProvider : () -> Activity = {
+    throw IllegalArgumentException("Error")
+}
+
+fun setActivityProvider(provider :() -> Activity){
+    activityProvider = provider
+}
+
+
 actual fun getType(): Type {
     return Type.Mobile
 }
@@ -18,35 +40,22 @@ actual fun getType(): Type {
 actual fun getRandomId(): String {
     return UUID.randomUUID().toString()
 }
-
-actual fun shareLink(url: String) {
-    try {
-        val sendIntent = Intent(Intent.ACTION_SEND).apply {
-            putExtra(Intent.EXTRA_TEXT, url)
-            type = "text/plain"
-        }
-        val shareIntent = Intent.createChooser(sendIntent, "Share Link")
-        ContextUtils.context.startActivity(shareIntent)
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-}
-
 actual fun dataStorePreferences(): DataStore<Preferences> {
-    val context = ContextUtils.context
+    val appContext = KoinPlatform.getKoin().get<Application>()
     return AppSettings.getDataStore(
         producerPath = {
-            context.filesDir.resolve(Constants.dataStoreFileName).absolutePath
+            appContext.filesDir
+                .resolve(Constants.dataStoreFileName)
+                .absolutePath
         }
     )
 }
 
 actual fun getDatabaseBuilder(): RoomDatabase.Builder<NewsDatabase> {
-    val appContext = ContextUtils.context// KoinPlatform.getKoin().get<Application>()
+    val appContext = KoinPlatform.getKoin().get<Application>()
     val dbFile = appContext.getDatabasePath(DB_NAME)
     return Room.databaseBuilder<NewsDatabase>(
         context = appContext,
         name = dbFile.absolutePath
     )
 }
-

@@ -1,12 +1,13 @@
 package com.rpn.newskmpapp.data.repository
 
+import com.rpn.newskmpapp.data.local.dao.CachedArticleDao
 import com.rpn.newskmpapp.data.mapper.toDomainModel2List
 import com.rpn.newskmpapp.data.mapper.toDomainModelList
+import com.rpn.newskmpapp.data.model.Article
 import com.rpn.newskmpapp.data.remote.dto.NewsResponseDto
 import com.rpn.newskmpapp.data.remote.news_dto.NewsResponse2Dto
 import com.rpn.newskmpapp.data.utils.Constants.API_KEY
 import com.rpn.newskmpapp.data.utils.Constants.API_KEY_2
-import com.rpn.newskmpapp.domain.model.Article
 import com.rpn.newskmpapp.domain.repository.NewsRepository
 import com.rpn.newskmpapp.domain.utils.DataState
 import io.ktor.client.HttpClient
@@ -18,7 +19,8 @@ import kotlinx.coroutines.flow.flow
 
 class NewsRepositoryImpl(
     private val clientA: HttpClient,
-    private val clientB: HttpClient
+    private val clientB: HttpClient,
+    private val cachedArticleDao: CachedArticleDao
 ) : NewsRepository {
 
     override suspend fun getSearchResults(query: String): Flow<DataState<List<Article>>> = flow {
@@ -59,6 +61,7 @@ class NewsRepositoryImpl(
 
     override suspend fun getHeadLines(): Flow<DataState<List<Article>>> = flow {
         try {
+
             emit(DataState.Loading)
 
             val responseA = clientA.get("top-headlines") {
@@ -75,9 +78,15 @@ class NewsRepositoryImpl(
             val articlesB = responseB.results.toDomainModel2List()
             val combinedArticles = articlesB + articlesA
 
-            emit(DataState.Success(combinedArticles))
+            if (combinedArticles.isNotEmpty()) {
+                emit(DataState.Success(combinedArticles))
+            } else {
+                emit(DataState.Error("No results found"))
+            }
+
         } catch (e: Exception) {
-            emit(DataState.Error(e.message ?: "Unknown error"))
+            emit(DataState.Error("An error occurred: ${e.message}"))
         }
     }
+
 }

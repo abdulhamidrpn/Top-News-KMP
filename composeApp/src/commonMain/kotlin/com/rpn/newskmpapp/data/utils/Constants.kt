@@ -10,6 +10,7 @@ object Constants {
 
     const val LOG_TAG = "KMP_News_App"
     const val DB_NAME = "my_news_room.db"
+//    const val DB_NAME = "MyNewsDB"
 
     val API_KEY = BuildKonfig.API_KEY
     val API_KEY_2 = BuildKonfig.API_KEY_NEWS_DATA

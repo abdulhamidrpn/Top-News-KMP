@@ -31,6 +31,7 @@ import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.rpn.newskmpapp.presentation.icon.AppIcons
 import kmp_news_app.composeapp.generated.resources.Res
 import kmp_news_app.composeapp.generated.resources.ic_history
 import org.jetbrains.compose.resources.painterResource
@@ -124,7 +125,7 @@ fun SearchAppView(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Icon(
-                                    painter = painterResource(Res.drawable.ic_history),
+                                    painter = painterResource(AppIcons.History),
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.padding(end = 8.dp)

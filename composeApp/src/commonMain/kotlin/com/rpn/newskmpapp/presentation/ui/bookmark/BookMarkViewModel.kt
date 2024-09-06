@@ -1,8 +1,8 @@
 package com.rpn.newskmpapp.presentation.ui.bookmark
 
 import androidx.lifecycle.ViewModel
-import com.rpn.newskmpapp.data.mapper.toDomainModelEntityList
-import com.rpn.newskmpapp.data.repository.LocalNewsRepository
+import com.rpn.newskmpapp.data.mapper.toDomainFavoriteModelEntityList
+import com.rpn.newskmpapp.domain.repository.FavouriteNewsRepository
 import com.rpn.newskmpapp.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class BookMarkViewModel(
-    private val localNewsRepository: LocalNewsRepository
+    private val favouriteNewsRepository: FavouriteNewsRepository
 ) : ViewModel() {
 
     private val viewModelScope = CoroutineScope(Dispatchers.IO)
@@ -36,9 +36,9 @@ class BookMarkViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             _state.update { it.copy(articles = Resource.Loading) }
             try {
-                localNewsRepository.getArticles().collect { result ->
+                favouriteNewsRepository.getArticles().collect { result ->
                     _state.update {
-                        it.copy(articles = Resource.Success(result.toDomainModelEntityList()))
+                        it.copy(articles = Resource.Success(result.toDomainFavoriteModelEntityList()))
                     }
                 }
             } catch (e: Exception) {
